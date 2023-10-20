@@ -27,18 +27,24 @@ const AuthController = {
     //login Controller function
     async login(req, res, next) {
         try {
-            const { username, password } = req.body;
-            const user = await User.findOne({ username, password });
+            const { username } = req.body;
+            const user = await User.findOne({ username });
             if (!user) {
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
+            const ispasswd = await bcrypt.compare(req.body.password, user.password);
+            if (!ispasswd) {
+                return res.status(401).json({ message: 'Invalid credentials' });
+            }
+            
             const token = jwt.sign({ userId: user._id, userType: user.userType }, process.env.JWT_SECRET);
             
             res.cookie("access-token", token, {
                 httpOnly: true,
-             }).status(200).json({ token });
+             }).status(200).json({ token , user });
         } catch (error) {
             res.status(500).json({ error: error.message });
+            console.log(error)
         }
     }
 

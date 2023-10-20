@@ -6,7 +6,12 @@ const sellerSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  username:{
+    type:String,
+    required:true
+  }
   // Other seller-related fields
 });
 
-module.exports = mongoose.model('Seller', sellerSchema);
+const Seller = mongoose.model('Seller',sellerSchema)
+module.exports = Seller;

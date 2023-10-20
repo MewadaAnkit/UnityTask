@@ -19,5 +19,5 @@ const catalogSchema = new mongoose.Schema({
     },
   ],
 });
-
-module.exports = mongoose.model('Catalog', catalogSchema);
+const Catalog = mongoose.model('Catalog', catalogSchema);
+module.exports = Catalog;

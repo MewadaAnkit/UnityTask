@@ -18,9 +18,9 @@ app.use(require('./Routes/buyerRoutes'))
 
 
 
-app.get('/',(req,res)=>{
+/*app.get('/',(req,res)=>{
     res.send('hello from server')
-})
+})*/
 
 
 

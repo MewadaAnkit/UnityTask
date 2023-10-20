@@ -16,4 +16,16 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.pre('save', async function (next) {
+  try {
+    if (this.userType === 'seller') {
+      const Seller = mongoose.model('Seller');
+      await Seller.create({ userId: this._id , username:this.username });
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+const User =mongoose.model('User', userSchema);
+module.exports = User;
