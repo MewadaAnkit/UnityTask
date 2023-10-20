@@ -15,12 +15,7 @@ app.use(express.urlencoded({extended:false}));
 //Routes
 app.use(require('./Routes/authroutes'))
 app.use(require('./Routes/buyerRoutes'))
-
-
-
-/*app.get('/',(req,res)=>{
-    res.send('hello from server')
-})*/
+app.use(require('./Routes/SellerRoutes'))
 
 
 

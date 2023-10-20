@@ -1,6 +1,9 @@
 const Seller = require('../Model/Seller')
 const Catalog = require('../Model/catalog')
+const Order = require('../Model/Order')
 const BuyerController = {
+
+    //controller for getting the list of sellers
     async getSellers(req, res) {
         try {
             const sellers = await Seller.find();
@@ -10,6 +13,9 @@ const BuyerController = {
             res.status(500).json({ error: error.message });
         }
     },
+
+
+    //Controller for checking the catalog for particular seller
     async SellerCatalog(req, res) {
         const { seller_id } = req.params;
         try {
@@ -22,12 +28,16 @@ const BuyerController = {
             res.status(500).json({ error: error.message });
         }
     },
+
+    //controller method for creating order for particular seller
     async CreateOrder(req, res) {
+
         const { seller_id } = req.params;
+
+        //I am saving product as an array inside that i am taking name and price inside an object
         const { products } = req.body;
         try {
-            // Validate products, user, and seller
-            // Implement logic to create an order in the database
+            
             const order = new Order({
                 buyerId: req.user.userId,
                 sellerId: seller_id,
