@@ -7,8 +7,14 @@ const Port = process.env.PORT || 3000
 const DB = require('./Model/connection')
 
 //middlewares
-app.use(express.json());
 
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+
+
+//Routes
+app.use(require('./Routes/authroutes'))
+app.use(require('./Routes/buyerRoutes'))
 
 
 
